@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Created: 2024/11/04 11:47:30 by jpatrici          #+#    #+#             */
+/*   Updated: 2024/11/04 11:53:16 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-
-int	map_check(char *s_map);
-int	valid_map(char **map, int y);
-
-#endif // !SO_LONG
+void	ft_putendl_fd(char *s, int fd)
+{
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
+}

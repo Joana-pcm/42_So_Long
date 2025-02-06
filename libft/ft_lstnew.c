@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Created: 2024/11/04 14:08:49 by jpatrici          #+#    #+#             */
+/*   Updated: 2024/11/04 15:01:04 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "../libft/libft.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
 
-int	map_check(char *s_map);
-int	valid_map(char **map, int y);
-
-#endif // !SO_LONG
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}

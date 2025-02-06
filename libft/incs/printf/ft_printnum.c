@@ -1,21 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_printnum.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Created: 2024/11/07 11:11:57 by jpatrici          #+#    #+#             */
+/*   Updated: 2024/11/07 11:11:59 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../../libft.h"
 
-# include "../libft/libft.h"
+int	ft_printnum(int n)
+{
+	int		i;
+	long	k;
 
-int	map_check(char *s_map);
-int	valid_map(char **map, int y);
-
-#endif // !SO_LONG
+	i = 0;
+	k = n;
+	ft_putnbr_fd(n, 1);
+	if (k < 0)
+	{
+		k = -k;
+		i++;
+	}
+	else if (k == 0)
+		return (1);
+	while (k > 0)
+	{
+		k /= 10;
+		i++;
+	}
+	return (i);
+}
+/*int main ()*/
+/*{*/
+/*	printf("%d", ft_printnum(1));*/
+/*}*/

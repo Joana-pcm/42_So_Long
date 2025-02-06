@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Created: 2024/11/05 15:25:23 by jpatrici          #+#    #+#             */
+/*   Updated: 2024/11/05 17:13:00 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "../libft/libft.h"
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*n;
+	t_list	*no;
+	void	*temp;
 
-int	map_check(char *s_map);
-int	valid_map(char **map, int y);
-
-#endif // !SO_LONG
+	if (!lst || !f || !del)
+		return (0);
+	n = NULL;
+	while (lst)
+	{
+		temp = f(lst->content);
+		no = ft_lstnew(temp);
+		if (no == NULL)
+		{
+			ft_lstclear(&n, (del));
+			del(temp);
+			return (0);
+		}
+		ft_lstadd_back(&n, no);
+		lst = lst->next;
+	}
+	return (n);
+}

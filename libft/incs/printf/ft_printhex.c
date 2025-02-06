@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_printhex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Created: 2024/11/08 15:06:20 by jpatrici          #+#    #+#             */
+/*   Updated: 2024/11/08 15:49:33 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../../libft.h"
 
-# include "../libft/libft.h"
+int	ft_printhex(unsigned int n, int bi)
+{
+	int		count;
 
-int	map_check(char *s_map);
-int	valid_map(char **map, int y);
-
-#endif // !SO_LONG
+	count = 0;
+	if (n < 16)
+	{
+		if (bi)
+			count += write(1, &"0123456789abcdef"[n], 1);
+		else
+			count += write(1, &"0123456789ABCDEF"[n], 1);
+	}
+	if (n >= 16)
+	{
+		count += ft_printhex(n / 16, bi);
+		count += ft_printhex(n % 16, bi);
+	}
+	return (count);
+}

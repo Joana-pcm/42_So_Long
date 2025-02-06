@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_printunint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Created: 2024/11/13 13:19:38 by jpatrici          #+#    #+#             */
+/*   Updated: 2024/11/13 13:36:37 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../../libft.h"
 
-# include "../libft/libft.h"
+int	ft_printunint(unsigned int n)
+{
+	int		count;
+	char	c;
 
-int	map_check(char *s_map);
-int	valid_map(char **map, int y);
-
-#endif // !SO_LONG
+	count = 0;
+	if (n >= 10)
+	{
+		count += ft_printunint(n / 10);
+		count += ft_printunint(n % 10);
+	}
+	if (n < 10)
+	{
+		c = n + '0';
+		count += write(1, &c, 1);
+	}
+	return (count);
+}
