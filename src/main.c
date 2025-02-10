@@ -14,26 +14,50 @@
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
-	{
-		ft_printf("Error\n");
-		return (1);
-	}
-	if (!map_check(av[1]))
-	{
-		ft_printf("Error\n");
-		return (1);
-	}
+	char **map;
 
+	map = NULL;
+	map= map_check(av[1]);
+	if (ac != 2)
+		return (ft_printf("Error\n"));
+	if (!map || !char_check(map))
+		return (ft_printf("Error\n"));
 	return (0);
 }
 
-int	map_check(char *map_file)
+int	char_check(char **map)
+{
+	int	i;
+	int	j;
+	int	count;
+	int	coin;	
+
+	i = -1;
+	coin = 0;
+	count = 0;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j] != '\n')
+		{
+			count += (map[i][j] == 'E' || map[i][j] == 'P');
+			if (map[i][j] != 'E' && map[i][j] != 'P' 
+			&& map[i][j] != '1' && map[i][j] != '0'
+			&& map[i][j] != 'C')
+				return (0);
+			coin += (map[i][j] == 'C');
+		}
+	}
+			ft_printf("coin\t%d\n", coin);
+	return ((count != 2 || coin != 0));
+}
+
+char	**map_check(char *map_file)
 {
 	int	size;
 	int	i;
 	int	fd;
-	char **map;
+	char **temp;
 
 	size = ft_strlen(map_file);
 	if ((!ft_strnstr(map_file, ".ber", size) 
@@ -49,10 +73,13 @@ int	map_check(char *map_file)
 	i = -1;
 	if (size >= 3)
 	{
-		map = ft_calloc(sizeof(char *), size + 1);
+		temp = ft_calloc(sizeof(char *), size + 1);
 		while (++i < size)
-			map[i] = get_next_line(fd);
-		return (!valid_map(map, size));
+			temp[i] = get_next_line(fd);
+		if (!valid_map(temp, size))
+			return (0);
+		else
+			return (temp);
 	}
 	return (0);
 }
@@ -82,4 +109,4 @@ int	valid_map(char **map, int y)
 	return (0);
 }
 
-void	init_values()
+/*void	init_values()*/

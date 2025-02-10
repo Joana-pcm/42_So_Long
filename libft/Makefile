@@ -14,7 +14,7 @@ CC = cc
 
 CCFLAGS = -Werror -Wall -Wextra
 
-INCS = incs/gnl/get_next_line_bonus.c incs/gnl/get_next_line_utils_bonus.c \
+INCS = incs/gnl/get_next_line.c incs/gnl/get_next_line_utils.c \
 	  incs/printf/ft_printf.c incs/printf/ft_printnum.c incs/printf/ft_printstr.c \
 	  incs/printf/ft_printchr.c incs/printf/ft_printptr.c incs/printf/ft_printhex.c \
 	  incs/printf/ft_printunint.c

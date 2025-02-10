@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:53:34 by jpatrici          #+#    #+#             */
-/*   Updated: 2024/11/21 15:08:05 by jpatrici         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:53:38 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ char	*get_next_line(int fd)
 	static char	*stash;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096)
-		return (NULL);
 	if (!stash)
 	{
 		stash = ft_strdup("");
 		if (!stash)
 			return (NULL);
 	}
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	stash = get_stash(fd, stash);
-	if (!stash[fd])
+	if (!stash)
 		return (NULL);
 	line = get_line(&stash);
 	if (!stash)

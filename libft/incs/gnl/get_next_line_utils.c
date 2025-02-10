@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:53:53 by jpatrici          #+#    #+#             */
-/*   Updated: 2024/11/21 15:07:43 by jpatrici         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:53:54 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strchrlen(char *s, char c)
 	return (i);
 }
 
-char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	int		i;
@@ -51,7 +51,7 @@ char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strdup_gnl(const char *s)
+char	*ft_strdup(const char *s)
 {
 	char	*s2;
 	int		i;
@@ -67,7 +67,7 @@ char	*ft_strdup_gnl(const char *s)
 	return (s2);
 }
 
-char	*ft_strchr_gnl(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 	char	*p;
@@ -87,7 +87,7 @@ char	*ft_strchr_gnl(const char *s, int c)
 		return (0);
 }
 
-char	*ft_strjoin_gnl(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
 	int		j;
@@ -95,8 +95,8 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 
 	i = -1;
 	j = -1;
-	if ((ft_strchrlen((char *) s1, '\0') + \
-		ft_strchrlen((char *) s2, '\0')) == 0)
+	if ((ft_strchrlen((char *) s1, '\0') \
+		+ ft_strchrlen((char *) s2, '\0')) == 0)
 	{
 		free((char *)s1);
 		return (NULL);

@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Created: 2025/02/10 16:54:17 by jpatrici          #+#    #+#             */
+/*   Updated: 2025/02/10 17:15:08 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-
-# include "../libft/libft.h"
-
-typedef	struct s_mark
+int	fill(char **map, t_mark *p)
 {
-	int		y;
-	int		x;
-}		t_mark;
+	
+	target = map[p.y][p.x];
 
-char	**map_check(char *s_map);
-int	valid_map(char **map, int y);
-int	char_check(char **map);
-
-#endif // !SO_LONG
+	floodfill(map, target, p.y, p.x);
+}
