@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
 
 int	main(int ac, char **av)
 {
@@ -31,42 +28,30 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-int	map_check(char *s_map)
+int	map_check(char *map_file)
 {
 	int	size;
 	int	i;
 	int	fd;
 	char **map;
-	/*char *temp;*/
 
-	size = ft_strlen(s_map);
-	if ((!ft_strnstr(s_map, ".ber", size) 
-		&& s_map[size + 1] != '\0') || size == 4 
-		|| s_map[ft_strchrlen(s_map, '.') - 1] == '/')
+	size = ft_strlen(map_file);
+	if ((!ft_strnstr(map_file, ".ber", size) 
+		&& map_file[size + 1] != '\0') || size == 4 
+		|| map_file[ft_strchrlen(map_file, '.') - 1] == '/')
 		return (0);
-	fd = open(s_map, O_RDONLY);
+	fd = open(map_file, O_RDONLY);
 	size = 0;
-	printf("%i\n", fd);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%p\n", get_next_line(fd));
-	printf("%p\n", get_next_line(fd));
-	printf("%p\n", get_next_line(fd));
-	/*while ((temp = get_next_line(fd)) != NULL)*/
-	/*{*/
-	/*	size++;*/
-	/*}*/
-	printf("here\n");
+	while (get_next_line(fd))
+		size++;
 	close(fd);
-	fd = open(s_map, O_RDWR);
+	fd = open(map_file, O_RDWR);
 	i = -1;
-	if (size > 3)
+	if (size >= 3)
 	{
 		map = ft_calloc(sizeof(char *), size + 1);
 		while (++i < size)
 			map[i] = get_next_line(fd);
-		printf("%c\n", map[0][ft_strlen(map[0])]);
 		return (!valid_map(map, size));
 	}
 	return (0);
@@ -80,13 +65,15 @@ int	valid_map(char **map, int y)
 
 	i = -1;
 	x = ft_strchrlen(map[0], '\n');
+	if (x <= 3)
+		return (1);
 	while (map[++i])
 	{
 		j = -1;
-		while (map[i][++j])
+		while (map[i][++j] != '\n')
 		{
 			if (map[0][j] != '1' || map[i][0] != '1' 
-				|| map[y][j] != '1' || map[i][x] != '1')
+				|| map[y - 1][j] != '1' || map[i][x - 1] != '1')
 				return (ft_printf("Error\n"));
 		}
 		if (j < x && map[i][j + 1] == '\n')
@@ -94,3 +81,5 @@ int	valid_map(char **map, int y)
 	}
 	return (0);
 }
+
+void	init_values()

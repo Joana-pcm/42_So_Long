@@ -15,6 +15,12 @@
 
 # include "../libft/libft.h"
 
+typedef	struct s_mark
+{
+	int		y;
+	int		x;
+}		t_mark;
+
 int	map_check(char *s_map);
 int	valid_map(char **map, int y);
 

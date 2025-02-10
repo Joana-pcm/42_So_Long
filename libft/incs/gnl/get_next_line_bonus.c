@@ -28,7 +28,6 @@ static char	*get_line(char **stash)
 	keep = ft_substr(*stash, nl, (null - nl) + 1);
 	if (!keep)
 	{
-		printf("should be here\n");
 		free(line);
 		return (NULL);
 	}
@@ -64,28 +63,26 @@ static char	*get_stash(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash[4096];
+	static char	*stash;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096)
 		return (NULL);
-	if (!stash[fd])
+	if (!stash)
 	{
-		stash[fd] = ft_strdup("");
-		if (!stash[fd])
+		stash = ft_strdup("");
+		if (!stash)
 			return (NULL);
 	}
-	stash[fd] = get_stash(fd, stash[fd]);
+	stash = get_stash(fd, stash);
 	if (!stash[fd])
 		return (NULL);
-	line = get_line(&stash[fd]);
-	printf("wtf: %s\n", line);
-	if (!stash[fd])
+	line = get_line(&stash);
+	if (!stash)
 	{
-		free(stash[fd]);
-		stash[fd] = NULL;
+		free(stash);
+		stash = NULL;
 		return (NULL);
 	}
-	printf("gnl in final\n");
 	return (line);
 }
