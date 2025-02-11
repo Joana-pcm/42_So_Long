@@ -11,18 +11,28 @@
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
+#include <fcntl.h>
 
 int	main(int ac, char **av)
 {
-	char **map;
-
+	char	**map;
+	t_point	size;
 	map = NULL;
-	map= map_check(av[1]);
+	get_size(av[1], &size);
+	map = map_check(av[1]);
 	if (ac != 2)
-		return (ft_printf("Error\n"));
-	if (!map || !char_check(map))
-		return (ft_printf("Error\n"));
+		return (ft_printf("Error0\n"));
+	if (!map || !char_check(map) || fill(map, size))
+		return (ft_printf("Error1\n"));
 	return (0);
+}
+
+void	get_size(char *map_file, t_point *size)
+{
+	int	fd;
+
+	*(size.y) = 0;
+	fd = open(map_file, O_RDONLY);
 }
 
 int	char_check(char **map)
@@ -42,13 +52,11 @@ int	char_check(char **map)
 		{
 			count += (map[i][j] == 'E' || map[i][j] == 'P');
 			if (map[i][j] != 'E' && map[i][j] != 'P' 
-			&& map[i][j] != '1' && map[i][j] != '0'
-			&& map[i][j] != 'C')
+			&& map[i][j] != 'C' && map[i][j] != '1')
 				return (0);
 			coin += (map[i][j] == 'C');
 		}
 	}
-			ft_printf("coin\t%d\n", coin);
 	return ((count != 2 || coin != 0));
 }
 
@@ -106,7 +114,8 @@ int	valid_map(char **map, int y)
 		if (j < x && map[i][j + 1] == '\n')
 			return (ft_printf("Error\n"));
 	}
+	ft_printf("hehe\n");
+	if (fill(map, (y - 1), (x - 1)))
+		return (ft_printf("fuck\n"));
 	return (0);
 }
-
-/*void	init_values()*/

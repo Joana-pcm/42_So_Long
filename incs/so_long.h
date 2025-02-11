@@ -15,14 +15,19 @@
 
 # include "../libft/libft.h"
 
-typedef	struct s_mark
+typedef	struct s_point
 {
 	int		y;
 	int		x;
-}		t_mark;
+}		t_point;
 
 char	**map_check(char *s_map);
-int	valid_map(char **map, int y);
-int	char_check(char **map);
+int		valid_map(char **map, int y);
+void	get_size(char *map_file);
+int		char_check(char **map);
+t_point	init_point(char	**map, char c);
+int		floodfill(char **map, t_point size, int col, int row);
+int	coincount(char **map);
+int	fill(char **map, int length, int width);
 
 #endif // !SO_LONG
