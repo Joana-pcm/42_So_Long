@@ -16,59 +16,70 @@ int	fill(char **map, int length, int width)
 {	
 	t_point	p;
 	t_point	size;
-	int		coins;
-	char	target;
+	char	**temp;
 
 	size.y = length;
 	size.x = width;
-	coins = 0;
+	temp = mapcpy(map, size);
 	p = init_point(map, 'P');
-	target = map[p.y][p.x];
-	ft_printf("hi\n");
-	coins = floodfill(map, size, p.y, p.x);
+	floodfill(temp, size, p.y, p.x);
 	int i = -1;
-	while(map[++i])
-		ft_printf("%s", map[i]);
-	if (coins == coincount(map))
+	while (temp[++i])
+		ft_printf("%s", temp[i]);
+	if (coincount(temp))
 		return (1);
 	return (0);
 }
 
-int	floodfill(char **map, t_point size, int col, int row)
+char **mapcpy(char **map, t_point size)
 {
-	int	coins;
+	int		i;
+	char	**temp;
 
-	coins = 0;
-	if (col <= 0 || row <= 0 || col >= size.y || row >= size.x)
-		return (coins);
-	if (map[col][row] == '2' || map[col][row] != 'P')
-		return (coins);
-	if (map[col][row] == 'C')
-		coins++;
-	map[col][row] = '2' + (map[col][row] == 'E');
+	i = -1;
+	temp = ft_calloc(sizeof(char *), size.y + 2);
+	while (map[++i])
+		temp[i] = ft_strdup_gnl(map[i]); 
+	return (temp);
+}
+
+void	floodfill(char **map, t_point size, int col, int row)
+{
+	if (col < 0 || row < 0 || col > size.y || row > size.x)
+		return ;
+	if (map[col][row] == '2' || map[col][row] == '1' || map[col][row] == 'e')
+		return ;
+	map[col][row] = '2' + ((map[col][row] == 'E') * 51);
+	if (map[col][row] == 'e')
+		return ;
 	floodfill(map, size, col + 1, row);
 	floodfill(map, size, col - 1, row);
 	floodfill(map, size, col, row + 1);
 	floodfill(map, size, col, row - 1);
-	return (coins);
 }
 
 int	coincount(char **map)
 {
 	int	coins;
+	int exit;
 	int i;
 	int j;
 
 	coins = 0;
+	exit = 0;
 	i = 0;
-	j = 0;
 	while (map[++i])
 	{
+		j = 0;
 		while (map[i][++j])
+		{
 			if (map[i][j] == 'C')
 				coins++;
+			if (map[i][j] == 'e')
+				exit++;
+		}
 	}
-	return (coins);
+	return (coins || (exit != 1));
 }
 
 t_point	init_point(char	**map, char c)
@@ -77,12 +88,12 @@ t_point	init_point(char	**map, char c)
 	int		y;
 	int		x;
 
-	y = 0;
-	x = 0;
-	point.x = x;
+	y = -1;
 	point.y = y;
 	while (map[++y])
 	{
+		x = -1;
+		point.x = x;
 		while (map[y][++x])
 		{
 			if (map[y][x] == c)

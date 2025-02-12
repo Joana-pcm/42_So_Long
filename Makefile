@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRC = $(addprefix src/, main.c floodfill.c)
+SRC = $(addprefix src/, main.c floodfill.c parsing.c)
 
 OBJS = ${SRC:.c=.o}
 
