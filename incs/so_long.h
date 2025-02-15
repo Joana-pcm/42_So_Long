@@ -6,7 +6,7 @@
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/05 17:12:43 by jpatrici         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:03:20 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+
+# include <stdlib.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <fcntl.h>
+# include <stdio.h>
 
 typedef	struct s_point
 {
