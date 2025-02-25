@@ -91,4 +91,7 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2);
 char	*ft_strchr_gnl(const char *s, int c);
 char	*ft_strdup_gnl(const char *s);
 
+//extra
+int	ft_free(const char *s, ...);
+
 #endif

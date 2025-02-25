@@ -28,15 +28,34 @@ typedef	struct s_point
 	int		x;
 }		t_point;
 
+typedef struct s_win
+{
+	void	*mlx;
+	void	*img;
+	void	*win;
+	t_point	img_size;
+	t_point	player;
+} t_win;
+
+/*			INITIALISING		*/
+
+t_point	init_point(char	**map, char c);
+void	init_window(t_win *window);
+void	ft_exit(t_win *window);
+
+/*			PARSING				*/
+
 char	**map_check(char *s_map);
-int	parse_file(char *map_file);
+int		parse_file(char *map_file);
 int		valid_map(char **map, int y);
 void	get_size(char *map_file);
 int		char_check(char **map);
-t_point	init_point(char	**map, char c);
+
+/*			FLOODFILL			*/
+
 void	floodfill(char **map, t_point size, int col, int row);
 int		coincount(char **map);
 int		fill(char **map, int length, int width);
-char **mapcpy(char **map, t_point size);
+char	**mapcpy(char **map, t_point size);
 
 #endif // !SO_LONG

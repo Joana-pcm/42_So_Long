@@ -17,7 +17,7 @@ CCFLAGS = -Werror -Wall -Wextra
 INCS = incs/gnl/get_next_line.c incs/gnl/get_next_line_utils.c \
 	  incs/printf/ft_printf.c incs/printf/ft_printnum.c incs/printf/ft_printstr.c \
 	  incs/printf/ft_printchr.c incs/printf/ft_printptr.c incs/printf/ft_printhex.c \
-	  incs/printf/ft_printunint.c
+	  incs/printf/ft_printunint.c extra/ft_free.c
 
 
 SRC = ft_isprint.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isascii.c \
