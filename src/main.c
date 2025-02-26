@@ -26,24 +26,31 @@ int	main(int ac, char **av)
 	}
 	map = map_check(av[1]);
 	if (!map || !char_check(map))
-		return (ft_printf("Error\nInvalid map\n"));
-	init_window(window);
+		return (ft_printf("Error\nInvalid map\n"));	
+	init_window(map, window);
 	ft_exit(window);
 	return (0);
 }
 
-void	init_window(t_win *window)
-{
+void	init_window(char **map, t_win *window)
+{	
 	window = malloc(sizeof(t_win *));
-	window->mlx = mlx_init();
-	window->img = mlx_new_image(window->mlx, 1920, 1080);
+	window->size = init_point(map, '\0');
 	window->img_size.x = 102;
 	window->img_size.y = 102;
-	window->win = mlx_new_window(window->mlx, window->img_size.x, window->img_size.y, "42_So_Long");
+	window->size.y *= window->img_size.y;
+	window->size.x *= window->img_size.x;
+	window->mlx = mlx_init();
+	window->win = mlx_new_window(window->mlx, window->size.x, window->size.y, "42_So_Long");
 	mlx_loop(window->mlx);
+}
+
+int	render(char **map, t_win *window)
+{
+
 }
 
 void	ft_exit(t_win *window)
 {
-	ft_free("1t", window);
+	ft_free("1s", window);
 }

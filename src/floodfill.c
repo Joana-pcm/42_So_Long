@@ -104,5 +104,10 @@ t_point	init_point(char	**map, char c)
 			}
 		}
 	}
+	if (c == '\0' && map[y - 1][x] == '\0')
+	{
+		point.x = x - 1;
+		point.y = y - 1;
+	}
 	return (point);
 }

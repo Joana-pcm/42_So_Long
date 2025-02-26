@@ -6,7 +6,7 @@
 /*   By: jpatrici <jpatrici@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:12:41 by jpatrici          #+#    #+#             */
-/*   Updated: 2025/02/13 16:03:20 by jpatrici         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:21:24 by jpatrici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_win
 	void	*mlx;
 	void	*img;
 	void	*win;
+	t_point	size;
 	t_point	img_size;
 	t_point	player;
 } t_win;
@@ -40,7 +41,7 @@ typedef struct s_win
 /*			INITIALISING		*/
 
 t_point	init_point(char	**map, char c);
-void	init_window(t_win *window);
+void	init_window(char **map, t_win *window);
 void	ft_exit(t_win *window);
 
 /*			PARSING				*/
