@@ -12,7 +12,7 @@
 
 NAME = so_long
 
-SRC = $(addprefix src/, main.c floodfill.c parsing.c)
+SRC = $(addprefix src/, main.c floodfill.c parsing.c keyhooks.c)
 
 OBJS = ${SRC:.c=.o}
 

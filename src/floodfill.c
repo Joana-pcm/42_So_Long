@@ -26,7 +26,7 @@ int	fill(char **map, int length, int width)
 	int i = -1;
 	while (temp[++i])
 		ft_printf("%s", temp[i]);
-	if (coincount(temp))
+	if (coincount(temp, 0))
 		return (1);
 	return (0);
 }
@@ -58,7 +58,7 @@ void	floodfill(char **map, t_point size, int col, int row)
 	floodfill(map, size, col, row - 1);
 }
 
-int	coincount(char **map)
+int	coincount(char **map, int e)
 {
 	int	coins;
 	int exit;
@@ -75,7 +75,7 @@ int	coincount(char **map)
 		{
 			if (map[i][j] == 'C')
 				coins++;
-			if (map[i][j] == 'e')
+			if (map[i][j] == 'e' || e == 1)
 				exit++;
 		}
 	}

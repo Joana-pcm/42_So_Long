@@ -22,6 +22,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+#define	W 119
+#define	A 97
+#define	S 115
+#define	D 100
+#define ESC 65307
+
 typedef	struct s_point
 {
 	int		y;
@@ -33,6 +39,9 @@ typedef struct s_win
 	void	*mlx;
 	void	*img;
 	void	*win;
+	void	*txtr[5];
+	char	**map;
+	int		coins;
 	t_point	size;
 	t_point	img_size;
 	t_point	player;
@@ -41,8 +50,8 @@ typedef struct s_win
 /*			INITIALISING		*/
 
 t_point	init_point(char	**map, char c);
-void	init_window(char **map, t_win *window);
-void	ft_exit(t_win *window);
+void	init_data(char **map, t_win **data);
+int	ft_destroy(t_win *data);
 
 /*			PARSING				*/
 
@@ -55,8 +64,21 @@ int		char_check(char **map);
 /*			FLOODFILL			*/
 
 void	floodfill(char **map, t_point size, int col, int row);
-int		coincount(char **map);
+int		coincount(char **map, int e);
 int		fill(char **map, int length, int width);
 char	**mapcpy(char **map, t_point size);
+
+/*			KEYHOOKS			*/
+
+int	hooks(t_win *data);
+int	keys(int symkey, t_win data);
+int	render(char **map, t_win *data);
+
+/*			MOVES				*/
+
+int	moveup(t_win *data);
+int	moveleft(t_win *data);
+int	movedown(t_win *data);
+int	moveright(t_win *data);
 
 #endif // !SO_LONG
