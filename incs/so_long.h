@@ -50,7 +50,7 @@ typedef struct s_win
 /*			INITIALISING		*/
 
 t_point	init_point(char	**map, char c);
-void	init_data(char **map, t_win **data);
+void	init_data(char **map, t_win *data);
 int	ft_destroy(t_win *data);
 
 /*			PARSING				*/
@@ -71,7 +71,7 @@ char	**mapcpy(char **map, t_point size);
 /*			KEYHOOKS			*/
 
 int	hooks(t_win *data);
-int	keys(int symkey, t_win data);
+int	keys(int symkey, t_win *data);
 int	render(char **map, t_win *data);
 
 /*			MOVES				*/

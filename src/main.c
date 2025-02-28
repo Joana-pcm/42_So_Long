@@ -27,27 +27,27 @@ int	main(int ac, char **av)
 	map = map_check(av[1]);
 	if (!map || !char_check(map))
 		return (ft_printf("Error\nInvalid map\n"));	
-	init_data(map, &data);
+	init_data(map, data);
 	render(map, data);
 	mlx_loop(data->mlx);
 	return (0);
 }
 
-void	init_data(char **map, t_win **data)
+void	init_data(char **map, t_win *data)
 {	
-	(*data) = ft_calloc(sizeof(t_win *), 1);
-	if (!(*data))
+	data = ft_calloc(sizeof(t_win *), 1);
+	if (!data)
 		return ;
-	(*data)->mlx = mlx_init();
-	if (!(*data)->mlx)
+	data->mlx = mlx_init();
+	if (!data->mlx)
 		return ;
-	(*data)->size = init_point(map, '\0');
-	(*data)->map = mapcpy(map, (*data)->size);
-	(*data)->coins = 0;
-	(*data)->img_size.x = 106;
-	(*data)->img_size.y = 106;
-	(*data)->size.y *= (*data)->img_size.y;
-	(*data)->size.x *= (*data)->img_size.x;	
+	data->size = init_point(map, '\0');
+	data->map = mapcpy(map, data->size);
+	data->coins = 0;
+	data->img_size.x = 106;
+	data->img_size.y = 106;
+	data->size.y *= data->img_size.y;
+	data->size.x *= data->img_size.x;	
 }
 
 int	ft_destroy(t_win *data)

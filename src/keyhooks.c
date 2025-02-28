@@ -19,7 +19,7 @@ int	hooks(t_win *data)
 	return (0);
 }
 
-int	keys(int symkey, t_win data)
+int	keys(int symkey, t_win *data)
 {
 	if (symkey == ESC)
 	{
@@ -33,7 +33,6 @@ int	keys(int symkey, t_win data)
 		movedown(data);
 	else if (symkey == D)
 		moveright(data);
-	(void) data;
 	return (0);
 }
 
@@ -43,15 +42,15 @@ int	moveup(t_win *data)
 
 	p = data->player;
 	
-	if (data->map[p.x][p.y - 1] == '0' ||
-	data->map[p.x][p.y - 1] == 'C')
+	if (data->map[p.y - 1][p.x] == '0' ||
+	data->map[p.y - 1][p.x] == 'C')
 	{
-		data->map[p.x][p.y - 1] = 'P';
-		data->map[p.x][p.y] = '0';
+		data->map[p.y - 1][p.x] = 'P';
+		data->map[p.y][p.x] = '0';
+		data->player.y--;
 	}
-	if (!coincount(data->map, 1))
-		return (1);
-		/*open the exit*/
+	if (data->map[p.y - 1][p.x] == 'E' && !coincount(data->map, 1))
+		keys(ESC, data);
 	return (0);
 }
 
@@ -63,8 +62,43 @@ int	moveleft(t_win *data)
 	if (data->map[p.y][p.x - 1] == '0' ||
 	data->map[p.y][p.x -1] == 'C')
 	{
-		data->map[p.x][p.y]
+		data->map[p.y][p.x - 1] = 'P';
+		data->map[p.y][p.x] = '0';
+		data->player.x--;
 	}
+	if (!coincount(data->map, 1))
+		return (1);
+	return (0);
 }
-int	movedown(t_win *data);
-int	moveright(t_win *data);
+int	movedown(t_win *data)
+{
+	t_point	p;
+
+	p = data->player;
+	if (data->map[p.y + 1][p.x] == '0' ||
+	data->map[p.y + 1][p.x] == 'C')
+	{
+		data->map[p.y + 1][p.x] = 'P';
+		data->map[p.y][p.x] = '0';
+		data->player.y++;
+	}
+	if (!coincount(data->map, 1))
+		return (1);
+	return (0);
+}
+int	moveright(t_win *data)
+{
+	t_point	p;
+
+	p = data->player;
+	if (data->map[p.y][p.x - 1] == '0' ||
+	data->map[p.y][p.x -1] == 'C')
+	{
+		data->map[p.y][p.x - 1] = 'P';
+		data->map[p.y][p.x] = '0';
+		data->player.x--;
+	}
+	if (coincount(data->map, 1))
+		return (1);
+	return (0);
+}
