@@ -23,7 +23,8 @@ int	keys(int symkey, t_win *data)
 {
 	if (symkey == ESC)
 	{
-	exit(0);	
+		ft_destroy(data);
+		exit(0);
 	}
 	else if (symkey == W)
 		moveup(data);
