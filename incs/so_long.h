@@ -22,11 +22,11 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-#define	W 119
-#define	A 97
-#define	S 115
-#define	D 100
-#define ESC 65307
+# define	W 119
+# define	A 97
+# define	S 115
+# define	D 100
+# define ESC 65307
 
 typedef	struct s_point
 {
@@ -41,7 +41,7 @@ typedef struct s_win
 	void	*win;
 	void	*txtr[5];
 	char	**map;
-	int		coins;
+	int		moves;
 	t_point	size;
 	t_point	img_size;
 	t_point	player;

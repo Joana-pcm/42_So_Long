@@ -48,6 +48,7 @@ int	moveup(t_win *data)
 		data->map[p.y - 1][p.x] = 'P';
 		data->map[p.y][p.x] = '0';
 		data->player.y--;
+		ft_printf("Moves:\t%d\n", ++data->moves);
 	}
 	if (data->map[p.y - 1][p.x] == 'E' && !coincount(data->map, 1))
 		keys(ESC, data);
@@ -60,14 +61,15 @@ int	moveleft(t_win *data)
 
 	p = data->player;
 	if (data->map[p.y][p.x - 1] == '0' ||
-	data->map[p.y][p.x -1] == 'C')
+	data->map[p.y][p.x - 1] == 'C')
 	{
 		data->map[p.y][p.x - 1] = 'P';
 		data->map[p.y][p.x] = '0';
 		data->player.x--;
+		ft_printf("Moves:\t%d\n", ++data->moves);
 	}
-	if (!coincount(data->map, 1))
-		return (1);
+	if (data->map[p.y][p.x - 1] == 'E' && !coincount(data->map, 1))
+		keys(ESC, data);
 	return (0);
 }
 int	movedown(t_win *data)
@@ -81,9 +83,10 @@ int	movedown(t_win *data)
 		data->map[p.y + 1][p.x] = 'P';
 		data->map[p.y][p.x] = '0';
 		data->player.y++;
+		ft_printf("Moves:\t%d\n", ++data->moves);
 	}
-	if (!coincount(data->map, 1))
-		return (1);
+	if (data->map[p.y + 1][p.x] == 'E' && !coincount(data->map, 1))
+		keys(ESC, data);
 	return (0);
 }
 int	moveright(t_win *data)
@@ -91,14 +94,15 @@ int	moveright(t_win *data)
 	t_point	p;
 
 	p = data->player;
-	if (data->map[p.y][p.x - 1] == '0' ||
-	data->map[p.y][p.x -1] == 'C')
+	if (data->map[p.y][p.x + 1] == '0' ||
+	data->map[p.y][p.x + 1] == 'C')
 	{
-		data->map[p.y][p.x - 1] = 'P';
+		data->map[p.y][p.x + 1] = 'P';
 		data->map[p.y][p.x] = '0';
-		data->player.x--;
+		data->player.x++;
+		ft_printf("Moves:\t%d\n", ++data->moves);
 	}
-	if (coincount(data->map, 1))
-		return (1);
+	if (data->map[p.y][p.x + 1] && !coincount(data->map, 1))
+		keys(ESC, data);
 	return (0);
 }

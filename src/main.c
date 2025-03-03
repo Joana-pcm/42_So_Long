@@ -43,7 +43,7 @@ void	init_data(char **map, t_win *data)
 		return ;
 	data->size = init_point(map, '\0');
 	data->map = mapcpy(map, data->size);
-	data->coins = 0;
+	data->moves = 0;
 	data->img_size.x = 106;
 	data->img_size.y = 106;
 	data->size.y *= data->img_size.y;
