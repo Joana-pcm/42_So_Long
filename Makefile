@@ -12,14 +12,14 @@
 
 NAME = so_long
 
-SRC = $(addprefix src/, main.c floodfill.c parsing.c keyhooks.c)
+SRC = $(addprefix src/, main.c floodfill.c parsing.c render.c keyhooks.c)
 
 OBJS = ${SRC:.c=.o}
 
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -g
-MLXFLAGS = -L -lm -Ilmlx -lXext -lX11
+MLXFLAGS = -L ./minilibx-linux -lm -Ilmlx -lXext -lX11
 INCLUDE = -I include
 MAKE = make -C
 LIBFT_PATH = libft

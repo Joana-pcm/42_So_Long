@@ -39,19 +39,20 @@ typedef struct s_win
 	void	*mlx;
 	void	*img;
 	void	*win;
-	void	*txtr[5];
+	void	**txtr;
 	char	**map;
 	int		moves;
 	t_point	size;
 	t_point	img_size;
 	t_point	player;
-} t_win;
+}		t_win;
 
 /*			INITIALISING		*/
 
 t_point	init_point(char	**map, char c);
 void	init_data(char **map, t_win *data);
-int	ft_destroy(t_win *data);
+void	init_txtr(t_win *data);
+int		ft_destroy(t_win *data);
 
 /*			PARSING				*/
 
@@ -70,15 +71,19 @@ char	**mapcpy(char **map, t_point size);
 
 /*			KEYHOOKS			*/
 
-int	hooks(t_win *data);
-int	keys(int symkey, t_win *data);
-int	render(char **map, t_win *data);
+int		hooks(t_win *data);
+int		keys(int symkey, t_win *data);
 
 /*			MOVES				*/
 
-int	moveup(t_win *data);
-int	moveleft(t_win *data);
-int	movedown(t_win *data);
-int	moveright(t_win *data);
+int		moveup(t_win *data);
+int		moveleft(t_win *data);
+int		movedown(t_win *data);
+int		moveright(t_win *data);
+
+/*			GAME				*/
+
+int		render(t_win *data);
+int		get_img(char c);
 
 #endif // !SO_LONG
