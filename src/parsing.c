@@ -35,7 +35,7 @@ int	char_check(char **map)
 			coin += (map[i][j] == 'C');
 		}
 	}
-	return ((count == 2 || coin != 0));
+	return ((count == 2 && coin != 0));
 }
 
 int	parse_file(char *map_file)
