@@ -14,8 +14,8 @@
 
 int	hooks(t_win *data)
 {
-	mlx_hook(data->mlx, KeyRelease, KeyReleaseMask, &keys, &data);
-	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, &ft_destroy, &data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, &keys, data);
+	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, &ft_destroy, data);
 	return (0);
 }
 
@@ -42,7 +42,6 @@ int	moveup(t_win *data)
 	t_point	p;
 
 	p = data->player;
-	
 	if (data->map[p.y - 1][p.x] == '0' ||
 	data->map[p.y - 1][p.x] == 'C')
 	{
@@ -53,6 +52,7 @@ int	moveup(t_win *data)
 	}
 	if (data->map[p.y - 1][p.x] == 'E' && !coincount(data->map, 1))
 		keys(ESC, data);
+	render(data);
 	return (0);
 }
 
@@ -71,6 +71,7 @@ int	moveleft(t_win *data)
 	}
 	if (data->map[p.y][p.x - 1] == 'E' && !coincount(data->map, 1))
 		keys(ESC, data);
+	render(data);
 	return (0);
 }
 int	movedown(t_win *data)
@@ -88,6 +89,7 @@ int	movedown(t_win *data)
 	}
 	if (data->map[p.y + 1][p.x] == 'E' && !coincount(data->map, 1))
 		keys(ESC, data);
+	render(data);
 	return (0);
 }
 int	moveright(t_win *data)
@@ -103,7 +105,8 @@ int	moveright(t_win *data)
 		data->player.x++;
 		ft_printf("Moves:\t%d\n", ++data->moves);
 	}
-	if (data->map[p.y][p.x + 1] && !coincount(data->map, 1))
+	if (data->map[p.y][p.x + 1] == 'E' && !coincount(data->map, 1))
 		keys(ESC, data);
+	render(data);
 	return (0);
 }

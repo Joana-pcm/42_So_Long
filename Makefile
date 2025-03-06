@@ -12,7 +12,7 @@
 
 NAME = so_long
 
-SRC = $(addprefix src/, main.c floodfill.c parsing.c render.c keyhooks.c)
+SRC = $(addprefix src/, main.c floodfill.c parsing.c render.c keyhooks.c memfree.c)
 
 OBJS = ${SRC:.c=.o}
 
@@ -35,16 +35,16 @@ deps:
 
 	
 $(NAME): deps ${OBJS}
-	${CC} ${OBJS} ${LIBFT} ${MLXFLAGS} ${MLX} -o ${NAME}
+	@${CC} ${OBJS} ${LIBFT} ${MLXFLAGS} ${MLX} -o ${NAME}
 
 clean:
-	${MAKE} ${LIBFT_PATH} clean
-	${RM} ${OBJS}
+	@${MAKE} ${LIBFT_PATH} clean
+	@${RM} ${OBJS}
 
 fclean: clean
-	${MAKE} ${LIBFT_PATH} fclean
-	${RM} ${NAME} 
-	echo "all clean"
+	@${MAKE} ${LIBFT_PATH} fclean
+	@${RM} ${NAME} 
+	@echo "all clean"
 
 re: fclean all
 

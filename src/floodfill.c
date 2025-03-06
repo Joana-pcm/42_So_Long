@@ -23,11 +23,9 @@ int	fill(char **map, int length, int width)
 	temp = mapcpy(map, size);
 	p = init_point(map, 'P');
 	floodfill(temp, size, p.y, p.x);
-	int i = -1;
-	while (temp[++i])
-		ft_printf("%s", temp[i]);
 	if (coincount(temp, 0))
 		return (1);
+	arrfree(temp);
 	return (0);
 }
 
@@ -40,6 +38,7 @@ char **mapcpy(char **map, t_point size)
 	temp = ft_calloc(sizeof(char *), size.y + 2);
 	while (map[++i])
 		temp[i] = ft_strdup_gnl(map[i]); 
+	temp[i] = NULL;
 	return (temp);
 }
 
@@ -75,10 +74,12 @@ int	coincount(char **map, int e)
 		{
 			if (map[i][j] == 'C')
 				coins++;
-			if (map[i][j] == 'e' || e == 1)
+			if (map[i][j] == 'e')
 				exit++;
 		}
 	}
+	if (e == 1)
+		return (coins);
 	return (coins || (exit != 1));
 }
 
@@ -107,7 +108,7 @@ t_point	init_point(char	**map, char c)
 	if (c == '\0' && map[y - 1][x] == '\0')
 	{
 		point.x = x - 1;
-		point.y = y - 1;
+		point.y = y;
 	}
 	return (point);
 }

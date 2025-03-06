@@ -80,7 +80,7 @@ char	**map_check(char *map_file)
 	while (++i < size)
 		temp[i] = get_next_line(fd);
 	if (!valid_map(temp, size))
-		return (NULL);
+		return (arrfree(temp), NULL);
 	else
 		return (temp);
 }

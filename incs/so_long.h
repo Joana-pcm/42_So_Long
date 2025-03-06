@@ -86,4 +86,9 @@ int		moveright(t_win *data);
 int		render(t_win *data);
 int		get_img(char c);
 
+
+void	memfree(t_win *data, char **map);
+void	imgdestroy(t_win *data);
+void	arrfree(char **arr);
+
 #endif // !SO_LONG
