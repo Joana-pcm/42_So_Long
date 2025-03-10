@@ -29,7 +29,6 @@ int	main(int ac, char **av)
 	if (!data)
 		return (0);
 	init_data(map, data);
-	arrfree(map);
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (1);
@@ -46,6 +45,7 @@ void	init_data(char **map, t_win *data)
 	data->mlx = NULL;
 	data->size = init_point(map, '\0');
 	data->map = mapcpy(map, data->size);
+	arrfree(map);
 	data->player = init_point(data->map, 'P');
 	data->moves = 0;
 	data->img_size.x = 106;

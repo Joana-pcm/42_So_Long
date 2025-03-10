@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
+#include <fcntl.h>
+#include <stdio.h>
 
 int	char_check(char **map)
 {
@@ -49,8 +51,8 @@ int	parse_file(char *map_file)
 		&& map_file[size + 1] != '\0') || size == 4 
 		|| map_file[ft_strchrlen(map_file, '.') - 1] == '/')
 		return (0);
-	fd = open(map_file, O_RDONLY);
 	size = 0;
+	fd = open(map_file, O_RDONLY);
 	temp = get_next_line(fd);
 	while (temp)
 	{
@@ -68,6 +70,7 @@ char	**map_check(char *map_file)
 	int	size;
 	int	i;
 	int	fd;
+	char *temp2;
 	char **temp;
 
 	fd = open(map_file, O_RDONLY);
@@ -76,9 +79,14 @@ char	**map_check(char *map_file)
 		return (0);
 	else 
 		size = parse_file(map_file);
-	temp = ft_calloc(sizeof(char *), size + 1);
+	temp = ft_calloc(sizeof(char *), size + 2);
 	while (++i < size)
-		temp[i] = get_next_line(fd);
+	{
+		temp2 = get_next_line(fd);
+		temp[i] = ft_strdup(temp2);
+		free(temp2);
+	}
+	close(fd);
 	if (!valid_map(temp, size))
 		return (arrfree(temp), NULL);
 	else

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft.h"
+#include <stdio.h>
 
 int	ft_strchrlen(char *s, char c)
 {

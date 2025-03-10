@@ -90,5 +90,7 @@ int		get_img(char c);
 void	memfree(t_win *data, char **map);
 void	imgdestroy(t_win *data);
 void	arrfree(char **arr);
+char	*ft_gnl(int fd);
+void	ft_getline(char *line, int fd, int *n);
 
 #endif // !SO_LONG

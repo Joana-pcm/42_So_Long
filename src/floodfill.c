@@ -24,7 +24,7 @@ int	fill(char **map, int length, int width)
 	p = init_point(map, 'P');
 	floodfill(temp, size, p.y, p.x);
 	if (coincount(temp, 0))
-		return (1);
+		return (arrfree(temp), 1);
 	arrfree(temp);
 	return (0);
 }
@@ -37,7 +37,7 @@ char **mapcpy(char **map, t_point size)
 	i = -1;
 	temp = ft_calloc(sizeof(char *), size.y + 2);
 	while (map[++i])
-		temp[i] = ft_strdup_gnl(map[i]); 
+		temp[i] = ft_strdup(map[i]); 
 	temp[i] = NULL;
 	return (temp);
 }

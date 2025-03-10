@@ -33,6 +33,7 @@ static char	*get_line(char **stash)
 	}
 	free(*stash);
 	*stash = keep;
+	free(keep);
 	return (line);
 }
 
@@ -42,7 +43,7 @@ static char	*get_stash(int fd, char *stash)
 	ssize_t		bytes;
 
 	bytes = 1;
-	curr = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	curr = (char *) ft_calloc(sizeof(char), (BUFFER_SIZE + 2));
 	if (!curr)
 		return (NULL);
 	while (bytes > 0 && !ft_strchr(stash, '\n'))
