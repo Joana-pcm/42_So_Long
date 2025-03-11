@@ -14,10 +14,16 @@
 
 char	*ft_gnl(int fd)
 {
-	char	line[7000];
+	static char	*line;
 	int		i;
 
 	i = 0;
+	if (!line)
+	{
+		line = ft_strdup("");
+		if (!line)
+			return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	ft_getline(line, fd, &i);
@@ -44,7 +50,8 @@ void	ft_getline(char *line, int fd, int *n)
 			if (buffer_read <= 0)
 				break;
 		}
-		line[i++] = buffer[buffer_pos++];
+		
+		line = ft_strjoin(line, &buffer[buffer_pos++]);
 		if (buffer[buffer_pos - 1] == '\n')
 			break ;
 	}

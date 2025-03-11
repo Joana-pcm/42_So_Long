@@ -21,11 +21,11 @@ static char	*get_line(char **stash)
 
 	nl = ft_strchrlen(*stash, '\n');
 	nl += ((*stash)[nl] == '\n');
-	line = ft_substr(*stash, 0, nl);
+	line = ft_substr_gnl(*stash, 0, nl);
 	if (!line)
 		return (NULL);
 	null = ft_strchrlen(*stash, '\0');
-	keep = ft_substr(*stash, nl, (null - nl) + 1);
+	keep = ft_substr_gnl(*stash, nl, (null - nl) + 1);
 	if (!keep)
 	{
 		free(line);
@@ -33,7 +33,6 @@ static char	*get_line(char **stash)
 	}
 	free(*stash);
 	*stash = keep;
-	free(keep);
 	return (line);
 }
 
@@ -43,10 +42,10 @@ static char	*get_stash(int fd, char *stash)
 	ssize_t		bytes;
 
 	bytes = 1;
-	curr = (char *) ft_calloc(sizeof(char), (BUFFER_SIZE + 2));
+	curr = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!curr)
 		return (NULL);
-	while (bytes > 0 && !ft_strchr(stash, '\n'))
+	while (bytes > 0 && !ft_strchr_gnl(stash, '\n'))
 	{
 		bytes = read(fd, curr, BUFFER_SIZE);
 		if (bytes < 0)
@@ -56,7 +55,7 @@ static char	*get_stash(int fd, char *stash)
 			return (NULL);
 		}
 		curr[bytes] = '\0';
-		stash = ft_strjoin(stash, curr);
+		stash = ft_strjoin_gnl(stash, curr);
 	}
 	free(curr);
 	return (stash);
@@ -69,7 +68,7 @@ char	*get_next_line(int fd)
 
 	if (!stash)
 	{
-		stash = ft_strdup("");
+		stash = ft_strdup_gnl("");
 		if (!stash)
 			return (NULL);
 	}

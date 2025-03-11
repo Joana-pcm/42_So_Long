@@ -40,6 +40,16 @@ int	char_check(char **map)
 	return ((count == 2 && coin != 0));
 }
 
+int	beerfinder(char *map_file, int size)
+{
+	while(size > 0 && map_file[size] != '.')
+			size--;
+	printf("%c\n", map_file[size - 1]);
+	if(size > 0 && map_file[size] != '/')
+		return 1;
+	return -1;
+}
+
 int	parse_file(char *map_file)
 {
 	int	size;
@@ -47,9 +57,9 @@ int	parse_file(char *map_file)
 	char *temp;
 
 	size = ft_strlen(map_file);
-	if ((!ft_strnstr(map_file, ".ber", size) 
-		&& map_file[size + 1] != '\0') || size == 4 
-		|| map_file[ft_strchrlen(map_file, '.') - 1] == '/')
+
+	if (beerfinder(map_file, size) && ((!ft_strnstr(map_file, ".ber", size) 
+		&& map_file[size + 1] != '\0') || size == 4)) 
 		return (0);
 	size = 0;
 	fd = open(map_file, O_RDONLY);
@@ -57,10 +67,10 @@ int	parse_file(char *map_file)
 	while (temp)
 	{
 		free(temp);
+		temp = NULL;
 		temp = get_next_line(fd);
 		size++;
 	}
-	free(temp);
 	close(fd);
 	return ((size >= 3) * size);
 }
@@ -70,11 +80,12 @@ char	**map_check(char *map_file)
 	int	size;
 	int	i;
 	int	fd;
-	char *temp2;
 	char **temp;
 
 	fd = open(map_file, O_RDONLY);
 	i = -1;
+	if (fd < 0)
+		return (NULL);
 	if (!parse_file(map_file))
 		return (0);
 	else 
@@ -82,10 +93,9 @@ char	**map_check(char *map_file)
 	temp = ft_calloc(sizeof(char *), size + 2);
 	while (++i < size)
 	{
-		temp2 = get_next_line(fd);
-		temp[i] = ft_strdup(temp2);
-		free(temp2);
+		temp[i] = get_next_line(fd);
 	}
+	get_next_line(fd);
 	close(fd);
 	if (!valid_map(temp, size))
 		return (arrfree(temp), NULL);

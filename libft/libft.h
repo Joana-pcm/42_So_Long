@@ -85,7 +85,7 @@ int		ft_printunint(unsigned int n);
 
 //getnextline functions
 char	*get_next_line(int fd);
-int		ft_strchrlen(char *s, char c);
+int		ft_strchrlen(const char *s, char c);
 char	*ft_substr_gnl(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
 char	*ft_strchr_gnl(const char *s, int c);

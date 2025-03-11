@@ -45,7 +45,7 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	@$(CC) $(CCFLAGS) -o $@ -c $<
+	@$(CC) $(CCFLAGS) -g -o $@ -c $<
 
 clean: 
 	@rm -f $(OBJS) $(BONUS_OBJS)

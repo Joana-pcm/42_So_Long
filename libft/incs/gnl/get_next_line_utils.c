@@ -13,7 +13,7 @@
 #include "../../libft.h"
 #include <stdio.h>
 
-int	ft_strchrlen(char *s, char c)
+int	ft_strchrlen(const char *s, char c)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	ft_strchrlen(char *s, char c)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	int		i;
@@ -68,7 +68,7 @@ char	*ft_strdup_gnl(const char *s)
 	return (s2);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	int		i;
 	char	*p;
